@@ -1,0 +1,37 @@
+.calculator-buttons{
+  display: grid;
+  grid-template-columns: 60px 60px 60px 60px;
+  column-gap: 10px;
+  row-gap: 16px;
+}
+
+.calculator-buttons button{
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  font-size: 26px;
+  border: 0;
+}
+
+.calculator-buttons .numbers{
+  background-color: rgb(64, 64, 64);
+  color: white;
+  
+}
+.calculator-buttons .operation{
+  background-color: rgb(174, 173, 173);
+}
+.calculator-buttons .equals{
+  background-color: rgb(79, 192, 18);
+  color: white;
+}
+.calculator-buttons .clear{
+  background-color: rgb(174, 173, 173);
+  font-size: 17px;
+}
+
+
+body{
+  background-color: black;
+  color: white;
+}

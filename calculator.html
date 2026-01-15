@@ -12,85 +12,130 @@
   <div class="calculator-buttons">
 
     <button class="numbers" onclick="
-      calculation+='1';
-      console.log(calculation);
+      // calculation+='1';
+      // console.log(calculation);
+      updateCalculation('1');
       "> 1 </button>
     <button class="numbers" onclick="
-      calculation+='2';
-      console.log(calculation);
+      // calculation+='2';
+      // console.log(calculation);
+      updateCalculation('2');
       "> 2 </button>
     <button class="numbers" onclick="
-      calculation+='3';
-      console.log(calculation);
+      // calculation+='3';
+      // console.log(calculation);
+      updateCalculation('3');
       "> 3 </button>
 
     <button class="operation" onclick="
-      calculation+=' / ';
-      console.log(calculation);
+      // calculation+=' / ';
+      // console.log(calculation);
+      updateCalculation('/');
       "> / </button>
 
     <button class="numbers" onclick="
-      calculation+='4';
-      console.log(calculation);
+      // calculation+='4';
+      // console.log(calculation);
+      updateCalculation('4');
       "> 4 </button>
     <button class="numbers" onclick="
-      calculation+='5';
-      console.log(calculation);
+      // calculation+='5';
+      // console.log(calculation);
+      updateCalculation('5');
       "> 5 </button>
     <button class="numbers" onclick="
-      calculation+='6';
-      console.log(calculation);
+      // calculation+='6';
+      // console.log(calculation);
+      updateCalculation('6');
       "> 6 </button>
 
     <button class="operation" onclick="
-      calculation+=' * ';
-      console.log(calculation);
+      // calculation+=' * ';
+      // console.log(calculation);
+      updateCalculation('*');
       "> * </button>
     <button class="numbers" onclick="
-      calculation+='7';
-      console.log(calculation);
+      // calculation+='7';
+      // console.log(calculation);
+      updateCalculation('7');
       "> 7 </button>
     <button class="numbers" onclick="
-      calculation+='8';
-      console.log(calculation);
+      // calculation+='8';
+      // console.log(calculation);
+      updateCalculation('8');
       "> 8 </button>
     <button class="numbers" onclick="
-      calculation+='9';
-      console.log(calculation);
+      // calculation+='9';
+      // console.log(calculation);
+      updateCalculation('9');
       "> 9 </button>
 
     <button class="operation" onclick="
-      calculation+=' - ';
-      console.log(calculation);
+      // calculation+=' - ';
+      // console.log(calculation);
+      updateCalculation('-');
       "> - </button>
       <button class="numbers" onclick="
-      calculation+='.';
-      console.log(calculation);
+      // calculation+='.';
+      // console.log(calculation);
+      updateCalculation('.');
       "> . </button>
     <button class="numbers" onclick="
-      calculation+='0';
-      console.log(calculation);
+      // calculation+='0';
+      // console.log(calculation);
+      updateCalculation('0');
       "> 0 </button>
 
     <button class="operation" onclick="
-      calculation+=' + ';
-      console.log(calculation);
+      // calculation+=' + ';
+      // console.log(calculation);
+      updateCalculation('+');
       "> + </button>
 
     <button class="equals" onclick="
-      calculation= eval(calculation);
-      console.log(calculation);
-      alert('Result: '+calculation);
+      // calculation= eval(calculation);
+      // console.log(calculation);
+      // alert('Result: '+calculation);
+      updateCalculation('=');
       "> = </button>
       <button class="clear" onclick="
-      calculation= '0';
-      console.log(calculation);
+      // calculation= '0';
+      // console.log(calculation);
+      updateCalculation('C');
       "> Clear </button>
   </div>
   
 
   <script>
     let calculation='';
+
+    function updateCalculation(entry){
+
+      const operators = ['+','-','*','/'];
+      if(entry === '='){
+        calculation= eval(calculation);
+        console.log(calculation);
+        alert('Result: '+calculation);
+        calculation='';
+      }
+      else if(entry === 'C'){
+        calculation = '0';
+        console.log(calculation);
+        calculation='';
+      }
+      else{
+        if(operators.includes(entry)){
+          calculation+= ' '+entry+' ';
+          console.log(calculation);
+        }
+        else{
+          calculation += entry;
+          console.log(calculation);
+        }
+        
+      }
+      
+    }
   </script>
 </body>
 

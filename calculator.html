@@ -107,7 +107,8 @@
   
 
   <script>
-    let calculation='';
+    let calculation=JSON.parse(localStorage.getItem('calculation')) || '';
+    console.log(calculation);
 
     function updateCalculation(entry){
 
@@ -116,12 +117,10 @@
         calculation= eval(calculation);
         console.log(calculation);
         alert('Result: '+calculation);
-        calculation='';
       }
       else if(entry === 'C'){
-        calculation = '0';
+        calculation = '';
         console.log(calculation);
-        calculation='';
       }
       else{
         if(operators.includes(entry)){
@@ -134,6 +133,7 @@
         }
         
       }
+      localStorage.setItem('calculation',JSON.stringify(calculation));
       
     }
   </script>

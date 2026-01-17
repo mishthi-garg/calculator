@@ -13,124 +13,100 @@
   <div class="calculator-buttons">
 
     <button class="numbers" onclick="
-      // calculation+='1';
-      // console.log(calculation);
       updateCalculation('1');
       "> 1 </button>
     <button class="numbers" onclick="
-      // calculation+='2';
-      // console.log(calculation);
       updateCalculation('2');
       "> 2 </button>
     <button class="numbers" onclick="
-      // calculation+='3';
-      // console.log(calculation);
       updateCalculation('3');
       "> 3 </button>
 
     <button class="operation" onclick="
-      // calculation+=' / ';
-      // console.log(calculation);
       updateCalculation('/');
       "> / </button>
 
     <button class="numbers" onclick="
-      // calculation+='4';
-      // console.log(calculation);
       updateCalculation('4');
       "> 4 </button>
     <button class="numbers" onclick="
-      // calculation+='5';
-      // console.log(calculation);
       updateCalculation('5');
       "> 5 </button>
     <button class="numbers" onclick="
-      // calculation+='6';
-      // console.log(calculation);
       updateCalculation('6');
       "> 6 </button>
 
     <button class="operation" onclick="
-      // calculation+=' * ';
-      // console.log(calculation);
       updateCalculation('*');
       "> * </button>
     <button class="numbers" onclick="
-      // calculation+='7';
-      // console.log(calculation);
       updateCalculation('7');
       "> 7 </button>
     <button class="numbers" onclick="
-      // calculation+='8';
-      // console.log(calculation);
       updateCalculation('8');
       "> 8 </button>
     <button class="numbers" onclick="
-      // calculation+='9';
-      // console.log(calculation);
       updateCalculation('9');
       "> 9 </button>
 
     <button class="operation" onclick="
-      // calculation+=' - ';
-      // console.log(calculation);
       updateCalculation('-');
       "> - </button>
       <button class="numbers" onclick="
-      // calculation+='.';
-      // console.log(calculation);
       updateCalculation('.');
       "> . </button>
     <button class="numbers" onclick="
-      // calculation+='0';
-      // console.log(calculation);
       updateCalculation('0');
       "> 0 </button>
 
     <button class="operation" onclick="
-      // calculation+=' + ';
-      // console.log(calculation);
       updateCalculation('+');
       "> + </button>
 
     <button class="equals" onclick="
-      // calculation= eval(calculation);
-      // console.log(calculation);
-      // alert('Result: '+calculation);
       updateCalculation('=');
       "> = </button>
       <button class="clear" onclick="
-      // calculation= '0';
-      // console.log(calculation);
       updateCalculation('C');
       "> Clear </button>
   </div>
   
 
   <script>
-    let calculation=JSON.parse(localStorage.getItem('calculation')) || '';
+    let calculation=JSON.parse(localStorage.getItem('calculation')) || '0';
+    let justEvaluated = false;
     console.log(calculation);
+    document.querySelector('.js-expression').innerHTML = `${calculation}`;
 
     function updateCalculation(entry){
 
       const operators = ['+','-','*','/'];
       if(entry === '='){
         calculation= eval(calculation);
+        justEvaluated = true;
         console.log(calculation);
-        document.querySelector('.js-expression').innerHTML = `${calculation}`;
       }
       else if(entry === 'C'){
-        calculation = '';
+        calculation = '0';
+        justEvaluated = true;
         console.log(calculation);
+        localStorage.removeItem('calculation');
       }
       else{
-        if(operators.includes(entry)){
-          calculation+= ' '+entry+' ';
-          console.log(calculation);
+        if(justEvaluated && !operators.includes(entry)){
+          calculation = entry;
+          justEvaluated = false;
         }
         else{
-          calculation += entry;
-          console.log(calculation);
+          if(operators.includes(entry)){
+            calculation+= ' '+entry+' ';
+            console.log(calculation);
+          }
+          else{
+            calculation += entry;
+            console.log(calculation);
+          }
+          justEvaluated = false;
         }
         
       }

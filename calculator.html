@@ -9,6 +9,7 @@
 </head>
 
 <body>
+  <p class="js-expression"></p>
   <div class="calculator-buttons">
 
     <button class="numbers" onclick="
@@ -116,7 +117,7 @@
       if(entry === '='){
         calculation= eval(calculation);
         console.log(calculation);
-        alert('Result: '+calculation);
+        document.querySelector('.js-expression').innerHTML = `${calculation}`;
       }
       else if(entry === 'C'){
         calculation = '';
@@ -134,7 +135,7 @@
         
       }
       localStorage.setItem('calculation',JSON.stringify(calculation));
-      
+      document.querySelector('.js-expression').innerHTML = `${calculation}`;
     }
   </script>
 </body>

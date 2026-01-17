@@ -74,7 +74,7 @@
 
   <script>
     let calculation=JSON.parse(localStorage.getItem('calculation')) || '0';
-    let justEvaluated = false;
+    let justEvaluated = true;
     console.log(calculation);
     document.querySelector('.js-expression').innerHTML = `${calculation}`;
 

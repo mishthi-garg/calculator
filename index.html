@@ -69,12 +69,16 @@
       <button class="clear" onclick="
       updateCalculation('C');
       "> Clear </button>
+      <button class="clear" onclick="
+      updateCalculation('del');
+      "> Del </button>      
   </div>
   
 
   <script>
     let calculation=JSON.parse(localStorage.getItem('calculation')) || '0';
     let justEvaluated = true;
+    let lastIsOperator = false;
     console.log(calculation);
     document.querySelector('.js-expression').innerHTML = `${calculation}`;
 
@@ -82,35 +86,54 @@
 
       const operators = ['+','-','*','/'];
       if(entry === '='){
-        calculation= eval(calculation);
+        if(lastIsOperator === true){
+          alert('Invalid format used');
+        }
+        else{
+        calculation= eval(calculation).toString();
         justEvaluated = true;
-        console.log(calculation);
+        lastIsOperator = false;
+        }
       }
       else if(entry === 'C'){
         calculation = '0';
         justEvaluated = true;
-        console.log(calculation);
         localStorage.removeItem('calculation');
+        lastIsOperator = false;
       }
+      else if(entry === 'del'){
+        if (lastIsOperator === true) calculation = calculation.slice(0, -3);
+        else calculation = calculation.slice(0, -1);
+        justEvaluated = false;
+        lastIsOperator = false;
+      }      
       else{
         if(justEvaluated && !operators.includes(entry)){
           calculation = entry;
           justEvaluated = false;
+          lastIsOperator = false;
         }
         else{
           if(operators.includes(entry)){
-            calculation+= ' '+entry+' ';
-            console.log(calculation);
+            if(lastIsOperator === true){
+              calculation = calculation.slice(0, -3);
+              lastIsOperator = true;
+            }
+            calculation+= ' '+entry+' ';  
+            lastIsOperator = true;
           }
           else{
             calculation += entry;
-            console.log(calculation);
+            
+            lastIsOperator = false;
           }
           justEvaluated = false;
         }
         
       }
       localStorage.setItem('calculation',JSON.stringify(calculation));
+
+      console.log(calculation);
       document.querySelector('.js-expression').innerHTML = `${calculation}`;
     }
   </script>
